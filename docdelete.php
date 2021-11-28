@@ -8,6 +8,10 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
+if(!$_SESSION['admin-username']){
+  header('Location:admin.php');
+}
+
 $users = new select($connection);
 $email = $_GET['email'];
 if($_SERVER["REQUEST_METHOD"] == 'GET'){
@@ -34,7 +38,9 @@ $_SESSION['doc-gender'] = $d[0][7];
 $_SESSION['doc-address'] = $d[0][1];
 $_SESSION['doc-password'] = $d[0][4];
 
-// echo $opassword;
+
+
+
 
 ?>
 
@@ -67,34 +73,33 @@ $_SESSION['doc-password'] = $d[0][4];
   
 </head>
 <body id='top'>
-
-    <header>
+<header>
 	
-        <nav class="navbar navbar-expand-lg navigation" id="navbar">
-            <div class="container">
-                  <a class="navbar-brand" href="index.html">
-                      <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
-                      <h1>MDX Hospital</h1>
-                  </a>
+  <nav class="navbar navbar-expand-lg navigation" id="navbar">
+      <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
+                <h1>MDX Hospital</h1>
+            </a>
+
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="icofont-navigation-menu"></span>
+        </button>
     
-                  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icofont-navigation-menu"></span>
-              </button>
-          
-              <div class="collapse navbar-collapse" id="navbarmain" >
-                <ul class="navbar-nav ml-auto" >
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                  </li>
-                   
-                    <li class="nav-item"><a class="nav-link" href="userget.php">user profiles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-        </nav>
-    </header>
+        <div class="collapse navbar-collapse" id="navbarmain" >
+          <ul class="navbar-nav ml-auto" >
+            <li class="nav-item active">
+              <a class="nav-link" href="admin-panel.php">Home</a>
+            </li>
+             
+              <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
+              <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
+              <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+</header>
 
 <div class="main-content" style="margin: 6% 36%;">
 <div class="welcome" style="text-align: center;">
@@ -110,7 +115,7 @@ $_SESSION['doc-password'] = $d[0][4];
         <input type="email" class="form-control" placeholder="Doctor's email" name='email' aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
             
-            <button class="btn btn-outline-secondary" type="submit" name='deldoc'  >Delete Doctor</button>
+            <button class="btn btn-outline-secondary" type="submit" name='deldoc'  >Get Doctor</button>
         </div>
         </div>
     </form>
@@ -118,6 +123,8 @@ $_SESSION['doc-password'] = $d[0][4];
 
 if(gettype($doc) == 'array'){
     ?>
+<form action="delconfirm.php" method="POST">
+
 
 <table class="table">
   <thead>
@@ -135,30 +142,41 @@ if(gettype($doc) == 'array'){
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td><?php echo $doc[0][1] ?></td>
-      <td><?php echo $doc[0][2] ?></td>
-      <td><?php echo $doc[0][6] ?></td>
-      <td><?php echo $doc[0][5] ?></td>
-      <td><?php echo $doc[0][3] ?></td>
-      <td><?php echo $doc[0][7] ?></td>
-      <td><?php echo $doc[0][8] ?></td>
+      <td><?php echo $doc[0][1]; ?></td>
+      <td><?php echo $doc[0][2]; ?></td>
+      <td><?php echo $doc[0][6]; ?></td>
+      <td><?php echo $doc[0][5]; ?></td>
+      <td><?php echo $doc[0][3]; ?></td>
+      <td><?php echo $doc[0][7]; ?></td>
+      <td><?php echo $doc[0][8]; ?></td>
     </tr>
   </tbody>
 </table>
- 
+<button type="submit" class="btn btn-primary" name="delete" >Delete Doctor</button>
+
+</form>
     <?php
 }
 else{
 ?>
-<div class="alert alert-primary" role="alert" style="text-align: center; margin-top:20px;">
+<div class="alert alert-primary" role="alert"  style="text-align: center; margin-top:20px;">
 <?php echo $doc;?>
 </div>
 <?php
 }
 
+if (!empty($_SESSION['deleted-doc'])){
+  ?>
+  <div class="alert alert-primary" role="alert" style="text-align: center; margin-top:20px;">
+  <?php echo $_SESSION['deleted-doc']; 
+        $_SESSION['deleted-doc'] = ''; 
+  ?>
+  </div>
+  <?php 
+}
+
 
 ?>
-
 
   
 
