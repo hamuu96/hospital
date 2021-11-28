@@ -19,7 +19,7 @@ $result = $appointment->doc_appointment($_SESSION['did']);
 //get medication
 $med = $appointment->medicine();
 
-// if($_SERVER["REQUEST_METHOD"] == 'POST'){
+if($_SERVER["REQUEST_METHOD"] == 'POST'){
   if(isset($_POST['diagnosis'])){
 
     $medicine_array = array();
@@ -27,13 +27,13 @@ $med = $appointment->medicine();
     $med2 = $_POST['med2']; 
     $med3 = $_POST['med3']; 
     $msg = $_POST['feedback'];
-    
-    echo $med1;
-    echo $med2;
-    echo $med3;
-    echo $msg;
+    // add medicine to aary -> convert to string 
+    array_push($medicine_array, $med1, $med2, $med3);
+    // add to records table
+    // remove appointment from doctors view
+  var_dump($medicine_array);  
   }
-// }
+}
 
 
 // echo gettype($result);

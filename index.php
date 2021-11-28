@@ -58,6 +58,7 @@ $result = $dep->department();
 			    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 			    <li class="nav-item"><a class="nav-link" href="appointment.php">Appoinment</a></li>
 			   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+			   <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
 			</ul>
 			
 		  </div>

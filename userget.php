@@ -68,33 +68,33 @@ $_SESSION['password'] = $d[0][4];
 </head>
 <body id='top'>
 
-    <header>
+<header>
 	
-        <nav class="navbar navbar-expand-lg navigation" id="navbar">
-            <div class="container">
-                  <a class="navbar-brand" href="index.html">
-                      <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
-                      <h1>MDX Hospital</h1>
-                  </a>
-    
-                  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icofont-navigation-menu"></span>
-              </button>
-          
-              <div class="collapse navbar-collapse" id="navbarmain" >
-                <ul class="navbar-nav ml-auto" >
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                  </li>
-                   
-                    <li class="nav-item"><a class="nav-link" href="userget.php">user profiles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navigation" id="navbar">
+        <div class="container">
+              <a class="navbar-brand" href="index.html">
+                  <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
+                  <h1>MDX Hospital</h1>
+              </a>
+
+              <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icofont-navigation-menu"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarmain" >
+            <ul class="navbar-nav ml-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="admin-panel.php">Home</a>
+              </li>
+               
+                <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
+                <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
+                <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
 
 <div class="main-content" style="margin: 6% 36%;">
 <div class="welcome" style="text-align: center;">

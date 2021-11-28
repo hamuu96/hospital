@@ -7,6 +7,10 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
+if(!$_SESSION['admin-username']){
+  header('Location:admin.php');
+}
+
 $users = new select($connection);
 $no_users = $users->user();
 $no_users = count($no_users);
@@ -62,12 +66,12 @@ $doctors = count($doctors);
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="admin-panel.php">Home</a>
                   </li>
                    
                     <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
                     <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
                 </ul>
               </div>
             </div>

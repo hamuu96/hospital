@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="admin-panel.php">Home</a>
                   </li>
                    
                     <li class="nav-item"><a class="nav-link" href="">Appoinments</a></li>

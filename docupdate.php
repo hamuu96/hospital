@@ -8,6 +8,11 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
+if(!$_SESSION['admin-username']){
+    header('Location:admin.php');
+  }
+
+  
 // $users = new select($connection);
 
 // echo $user;
