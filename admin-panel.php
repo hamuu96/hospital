@@ -66,7 +66,7 @@ $doctors = count($doctors);
                   </li>
                    
                     <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Doctors profiles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
               </div>
