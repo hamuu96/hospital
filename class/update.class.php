@@ -31,7 +31,33 @@ class update{
        
         // $this->connection->close();
     }
-}
+  public function updatedoc($firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address,$docid)
+      {
+          $sql = 'UPDATE DOCTORS SET firstname = ?, lastname = ? , contact = ?, doc_pass = ?, age =? , email = ?, gender = ?, address = ? WHERE did = ?';
+          
+
+          $smti = $this->connection->prepare($sql);
+          if ( false===$smti ) {
+            
+              die('prepare() failed: ' . htmlspecialchars($this->connection->error));
+            }
+          $rc = $smti->bind_param("ssssisssi",$firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address,$docid);
+          if ( false===$rc ) {
+              // again execute() is useless if you can't bind the parameters. Bail out somehow.
+              die('bind_param() failed: ' . htmlspecialchars($smti->error));
+            }
+          $rc = $smti->execute();
+          if ( false===$rc ) {
+              die('execute() failed: ' . htmlspecialchars($smti->error));
+            }else{
+
+              return True;
+            }
+          
+        
+          // $this->connection->close();
+      }
+  }
 
 
 

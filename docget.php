@@ -13,8 +13,8 @@ $email = $_GET['email'];
 if($_SERVER["REQUEST_METHOD"] == 'GET'){
     if(isset($_GET['getdoc'])){
 
-        $user = $users->getdoc($email);
-        // var_dump($user);
+        $doc = $users->getdoc($email);
+        // var_dump($doc);
 
 
     }
@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == 'GET'){
 
 
 global $d;
-$d = $user;
+$d = $doc;
 // var_dump($d);
 $_SESSION['doc-id'] = $d[0][0];
 $_SESSION['doc-firstname'] = $d[0][1];
@@ -115,35 +115,35 @@ $_SESSION['doc-password'] = $d[0][4];
     </form>
     <?php
 
-if(gettype($user) == 'array'){
+if(gettype($doc) == 'array'){
     ?>
     <div class="main-content">
         <form action='docupdate.php' method='POST' class="row g-3">
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Firstname</label>
-            <input type="text" class="form-control" id="inputEmail4" name ='firstname' placeholder="<?php echo $user[0][1] ?>">
+            <input type="text" class="form-control" id="inputEmail4" name ='firstname' placeholder="<?php echo $doc[0][1] ?>">
         </div>
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Lastname</label>
-            <input type="text" class="form-control" id="inputAddress" name='lastname' placeholder="<?php echo $user[0][2] ?>">
+            <input type="text" class="form-control" id="inputAddress" name='lastname' placeholder="<?php echo $doc[0][2] ?>">
         </div>
        
         <div class="col-12">
             <label for="inputAddress" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" name='email' placeholder="<?php echo $user[0][6] ?>">
+            <input type="email" class="form-control" id="inputEmail4" name='email' placeholder="<?php echo $doc[0][6] ?>">
         </div>
         <div class="col-12">
             <label for="inputAddress2" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAddress2" name="address" placeholder="<?php echo $user[0][8] ?>">
+            <input type="text" class="form-control" id="inputAddress2" name="address" placeholder="<?php echo $doc[0][8] ?>">
         </div>
         <div class="col-md-6">
             <label for="inputCity" class="form-label">Contact</label>
-            <input type="text" class="form-control" id="inputCity" name="contact" placeholder="<?php echo $user[0][3] ?>">
+            <input type="text" class="form-control" id="inputCity" name="contact" placeholder="<?php echo $doc[0][3] ?>">
         </div>
         <div class="col-md-4">
             <label for="inputState" class="form-label">Gender</label>
             <select id="inputState" name="gender" class="form-select">
-            <option  selected><?php echo $user[0][7] ?></option>
+            <option  selected><?php echo $doc[0][7] ?></option>
             <option>Male</option>
             <option>Female</option>
             <option>Dont specify</option>
@@ -151,11 +151,11 @@ if(gettype($user) == 'array'){
         </div>
         <div class="col-md-2">
             <label for="inputZip" class="form-label">Age</label>
-            <input type="text" class="form-control" name="age" id="inputZip" placeholder="<?php echo $user[0][5] ?>">
+            <input type="text" class="form-control" name="age" id="inputZip" placeholder="<?php echo $doc[0][5] ?>">
         </div>
       
         <div class="col-12" >
-            <button type="submit" class="btn btn-primary" name="update" >update user</button>
+            <button type="submit" class="btn btn-primary" name="update" >update doc</button>
         </div>
         </form>
 </div>
@@ -164,7 +164,7 @@ if(gettype($user) == 'array'){
 else{
 ?>
 <div class="alert alert-primary" role="alert" style="text-align: center; margin-top:20px;">
-<?php echo $user;?>
+<?php echo $doc;?>
 </div>
 <?php
 }
