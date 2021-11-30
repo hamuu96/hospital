@@ -53,15 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     }
     // echo count($doctors_in_dep);
     $appointment_doctor = $new[array_rand($new)];
-    // echo $new[array_rand($new)];
-  //  for($i=0; $i < count($doctors_in_dep); $i++){
-  //    echo $doctors_in_dep[$i][0];
-  //  } 
-
-    // echo $doctors_in_dep[1][0];
-   
-    // echo "variable firstname: {$firstname} lastname: {$lastname} date: {$date} time: {$time} msg: {$msg} dep: {$department_id} cont: {$contact} usrid: {$userid}";
-
+    
    
     $insert->insert_appointment($date,$msg,$contact,$firstname,$lastname,$userid,$appointment_doctor);
   }
@@ -115,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 			  <div class="collapse navbar-collapse" id="navbarmain">
 				<ul class="navbar-nav ml-auto">
 				  <li class="nav-item active">
-					<a class="nav-link" href="index.html">Home</a>
+					<a class="nav-link" href="main.php">Home</a>
 				  </li>
 				   <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
 					<li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>

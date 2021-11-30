@@ -22,7 +22,7 @@ $table_creation->main($database_select);
 
 $insert = new insert_data($database_select);
 $insert->insert_dep();
-$insert->insert_doctor();
+$insert->initial_insert_doctor();
 $insert->insert_medicine();
 $insert->insert_admin();
 
