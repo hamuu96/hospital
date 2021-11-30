@@ -8,6 +8,7 @@ $connection = $conn->connect();
 
 
 $user = new login($connection);
+$sec = new security();
 
 
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
@@ -15,9 +16,12 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
         $email = $user->escape_user_input($_POST['email']);
         $password = $user->escape_user_input($_POST['password']);
 
-        $docdata = $user->check_doc($email,$password);
+       
 
-        if ($docdata){
+        $docdata = $user->doc_login_verify($email);
+        $pass = $docdata[0][4];
+
+        if ($sec->verify($password,$pass) == true){
             $_SESSION['doctors-username'] = substr($docdata[0][1],0,-2).".".substr($docdata[0][2],0,-3).substr($docdata[0][4],-1,2);
             $_SESSION['firstname'] = $docdata[0][1];
             $_SESSION['lastname'] = $docdata[0][1];
