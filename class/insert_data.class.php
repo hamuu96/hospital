@@ -126,7 +126,56 @@ class insert_data{
                
             }
         }
-       
+      
+        public function check_doc($email){
+          // $sql = "SELECT user_id, email,firstname,lastname FROM USER where email='$email' and firstname='$firstname' and lastname='$lastname'";
+  
+          $sql = "SELECT did, email,firstname,lastname FROM DOCTORS where email= ? ";
+  
+          $smt= $this->connection->prepare($sql);
+  
+          $smt->bind_param("s",$email);
+          $smt->execute();
+          $result = $smt->get_result();
+          $existing_user = $result->fetch_all();
+          //check if user exists
+          if (count($existing_user) > 0){
+                  ?>
+                      <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+                         User already exists try using another email
+                      </div>
+                  <?php
+          }else{
+              return True;
+          } 
+         
+  
+      }
+      public function validate_doc($firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address){
+        if($firstname != '' and $lastname != '' and $doc_pass != '' and $contact != '' and $email != '' and $gender != '' and $address != ''){
+            if (strlen($doc_pass) >= 3){ //change password length
+                $return = $this->check_doc($email);
+                return $return;
+                // return True;
+            }else{
+                ?>
+                    <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+                       Plase enter a longer password for your security.
+                     </div>
+                <?php
+                }
+
+        }
+        else{
+            ?>
+            <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+               please fill form
+             </div>
+        <?php
+               
+            }
+        }
+      
     
     // insert n 'not working'; data to medicine 
     public function insert_medicine(){
@@ -139,23 +188,7 @@ class insert_data{
         VALUE(?,?)";
       
         $smti= $this->connection->prepare($sql);
-        // if ( false===$smti ) {
-           
-        //     die('prepare() failed: ' . htmlspecialchars($this->connection->error));
-        //   }
-        // $rc = $smti->bind_param("sssssii",$description,$medicine);
-        // if ( false===$rc ) {
-        //     // again execute() is useless if you can't bind the parameters. Bail out somehow.
-        //     die('bind_param() failed: ' . htmlspecialchars($smti->error));
-        //   }
-        
-        // $rc = $smti->execute();
-        // if ( false===$rc ) {
-        //     die('execute() failed: ' . htmlspecialchars($smti->error));
-        //   }
-        // else{
-        //     header('Location:confirmation.html');
-        // }
+     
         $rc = $smti->bind_param("ss",$description,$medicine);
 
         $description = 'common painkiller used to treat aches and pain. It can also be used to reduce a high temperature';
@@ -186,7 +219,7 @@ class insert_data{
 
     }
     // insert data into doctors table
-    public function insert_doctor(){
+    public function initial_insert_doctor(){
 
 
         $firstname = '';
@@ -216,54 +249,27 @@ class insert_data{
         $dep_id = 1;
         $smti->execute();
 
-        $firstname = 'hamu';
-        $lastname = 'Doe';
-        $contact = '+4471119191';
-        $doc_pass = '1234';
-        $age = 44;
-        $email = 'hamu@gmail.com';
-        $gender = 'Male';
-        $address = '23 olympic way , wembley';
-        $dep_id = 1;
-        $smti->execute();
+
+    }public function insert_doc($firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address,$dep_id){
 
 
-        $firstname = 'emil';
-        $lastname = 'Doe';
-        $contact = '+4471119191';
-        $doc_pass = '1234';
-        $age = 44;
-        $email = 'emil@gmail.com';
-        $gender = 'Male';
-        $address = '23 olympic way , wembley';
-        $dep_id = 1;
-        $smti->execute();
+        $sql = "INSERT INTO DOCTORS (firstname, lastname, contact, doc_pass, age, email, gender, address,dep_id ) 
+        VALUE(?,?,?,?,?,?,?,?,?)";
+        $smti= $this->connection->prepare($sql);
+        if ( false===$smti ) {
+           
+            die('prepare() failed: ' . htmlspecialchars($this->connection->error));
+          }
+        $rc = $smti->bind_param('ssssisssi',$firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address,$dep_id);
+        if ( false===$rc ) {
+            // again execute() is useless if you can't bind the parameters. Bail out somehow.
+            die('bind_param() failed: ' . htmlspecialchars($smti->error));
+          }
 
-        $firstname = 'john';
-        $lastname = 'Doe';
-        $contact = '+4471119191';
-        $doc_pass = '1234';
-        $age = 44;
-        $email = 'john@gmail.com';
-        $gender = 'Male';
-        $address = '23 olympic way , wembley';
-        $dep_id = 2;
-        $smti->execute();
-
-        $firstname = 'kate';
-        $lastname = 'Doe';
-        $contact = '+4471119191';
-        $doc_pass = '1234';
-        $age = 44;
-        $email = 'kate@gmail.com';
-        $gender = 'Male';
-        $address = '23 olympic way , wembley';
-        $dep_id = 3;
-
-        
-        $smti->execute();
-        
-        echo 'successful';
+        $rc = $smti->execute();
+        if ( false===$rc ) {
+            die('execute() failed: ' . htmlspecialchars($smti->error));
+          }
 
 
     }

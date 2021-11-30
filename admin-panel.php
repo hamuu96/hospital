@@ -72,6 +72,7 @@ $doctors = count($doctors);
                     <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
                     <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
                     <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doccreate.php">Doctor signup</a></li>
                 </ul>
               </div>
             </div>
@@ -111,6 +112,7 @@ $doctors = count($doctors);
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text" style="padding-top: 5px;">With supporting text below as a natural lead-in to additional content.</p><br>
        <?php
+       
         echo "No of users: {$no_users}";
        ?>
       </div>
