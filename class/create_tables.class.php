@@ -15,7 +15,7 @@ class create_tables{
             username varchar(20) not null,
             firstname varchar(10) not null,
             lastname varchar(20) not null,
-            admin_pass varchar(30) not null 
+            admin_pass varchar(200) not null 
            
             )";
         
@@ -58,7 +58,7 @@ class create_tables{
             firstname varchar(10) not null,
             lastname varchar(20) not null,
             contact varchar(30) not null, 
-            doc_pass varchar(30) not null,
+            doc_pass varchar(200) not null,
             age INT(3) not null,
             email varchar(50) not null,
             gender char(8) not null,
@@ -160,6 +160,7 @@ class create_tables{
         }
  
     }
+    
   
 
     public function main($connection){
