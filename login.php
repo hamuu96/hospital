@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
         $password = $user->escape_user_input($_POST['password']);
 
        
-        $userdata = $user->login_verify($email);
+        $userdata = $user->user_login_verify($email);
         $pass = $userdata[0][4];
        
         
@@ -80,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                   </li>
                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
