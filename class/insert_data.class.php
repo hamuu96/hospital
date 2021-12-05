@@ -327,6 +327,40 @@ class insert_data{
     }
 
     // insert data into records table
+    public function insert_record($msg,$userid,$did, $medid , $medid1 = null,$medid2 = null){
+
+        
+
+        $sql = "INSERT INTO RECORDS (diagnosis,user_id,did,med_id,med_id2,med_id3) 
+        VALUE(?,?,?,?,?,?)";
+
+        echo $medid[0][0];
+        echo $medid1[0][0];
+        echo $medid2[0][0];
+
+        
+        $smti= $this->connection->prepare($sql);
+        if ( false===$smti ) {
+           
+            die('prepare() failed: ' . htmlspecialchars($this->connection->error));
+          }
+        $rc = $smti->bind_param("siiiii",$msg, $userid, $did,$medid,$medid1,$medid2);
+        if ( false===$rc ) {
+            // again execute() is useless if you can't bind the parameters. Bail out somehow.
+            die('bind_param() failed: ' . htmlspecialchars($smti->error));
+          }
+        
+        $rc = $smti->execute();
+        if ( false===$rc ) {
+            die('execute() failed: ' . htmlspecialchars($smti->error));
+          }
+        else{
+          return True;
+        }
+        
+
+
+    }
 
     // public function main(){
     //     $insertdata = new insert_data($this->connection);
