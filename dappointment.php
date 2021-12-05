@@ -7,14 +7,14 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
-if(!$_SESSION['doctors-username']){
-    header('Location:dlogin.php');
-}
+$session = new session();
+$session->adm_sess($_SESSION['doctors-username']);
+
 
 
 $appointment = new select($connection);
+//fetch appointment information 
 $result = $appointment->doc_appointment($_SESSION['did']);
-// echo $_SESSION['did'];
 
 //get medication
 $med = $appointment->medicine();
@@ -23,22 +23,31 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
   if(isset($_POST['diagnosis'])){
 
     $medicine_array = array();
-    $med1 = $_POST['med1']; 
-    $med2 = $_POST['med2']; 
-    $med3 = $_POST['med3']; 
+    //convert medicine text to medicine id 
+    $med1 = $appointment->med_id($_POST['med1']); 
+    $med2 = $appointment->med_id($_POST['med2']);
+    $med3 = $appointment->med_id($_POST['med3']);
     $msg = $_POST['feedback'];
-    // add medicine to aary -> convert to string 
-    array_push($medicine_array, $med1, $med2, $med3);
-    // add to records table
-    // remove appointment from doctors view
-  var_dump($medicine_array);  
+   
+    $userid = (int) $_POST['userid'];
+    // var_dump($userid);
+
+    //convert to integer 
+    $ap_id = (int) $_POST['apid']; // return string
+   
+    
+    
+    //insert data into records table
+    $insert = new insert_data($connection);
+    $suc_record = $insert->insert_record($msg,$userid,$_SESSION['did'],$med1[0][0],$med2[0][0],$med3[0][0]);
+
+    if($suc_record == True){
+      $del = new delete($connection);
+      $del->del_appointment($ap_id);
+    }
+
   }
 }
-
-
-// echo gettype($result);
-
-
 
 
 ?>
@@ -85,15 +94,19 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
           
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                  </li>
-                   <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="appoinment.html">Appoinment</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                  
+                    <li class="nav-item"><a class="nav-link" href="docdash.php">Dashboard</a></li>
                 </ul>
               </div>
+              <div class="dropdown" style="padding-left:100px;">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $_SESSION['doctors-username']; ?>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a style="text-align: center;" class="dropdown-item" href="#">update profile</a>
+                <button style="width: 100%; border:none; background:none;"><a class="dropdown-item" href="#">log out</a></button>
+              </div>
+            </div>
             </div>
         </nav>
     </header>
@@ -105,6 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     </div>
     <?php
   if (gettype($result) == 'string' ){
+    
     ?>
       <div class="alert alert-primary" role="alert" style="text-align: center; margin-top:20px;">
         <?php echo $result;?>
@@ -116,6 +130,8 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     <div id="accordion" style="width: 50%; text-align:center; margin:auto; margin-top: 10%;">
       <?php
           for ($i=0; $i < count($result); $i++){
+            // $ap_id = $result[$i][0];
+            // echo $ap_id;
             ?>
               <div class="card">
               <div class="card-header" id="headingOne">
@@ -129,15 +145,22 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                 <form method="POST" action="dappointment.php">
+                <input type="text" name="apid" <?php $ap_id = $result[$i][0];  ?> placeholder="<?php var_dump($ap_id); ?>" value="<?php echo $ap_id?>" hidden >
+                <input type="text" name="userid" <?php $userid = $result[$i][4];  ?>  value="<?php echo $userid?>" hidden >
+                
                     <div class="form-row">
-                      <div class="col">
-                        <input type="text" class="form-control" placeholder="<?php echo $result[$i][0] ?>" disabled>
-                      </div>
                       <div class="col">
                         <input type="text" class="form-control" placeholder="<?php echo $result[$i][1] ?>" disabled>
                       </div>
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="<?php echo $result[$i][2] ?>" disabled>
+                      </div>
                        
                     </div>
+                    <div class="form-group purple-border" style="margin:0 2%; padding-bottom:20px;">
+                            <label for="exampleFormControlTextarea4">Patients message</label>
+                            <textarea class="form-control" name='feedback' id="exampleFormControlTextarea4" disabled rows="3"><?php echo $result[$i][3]; ?></textarea>
+                        </div>
                         <div class="form-group purple-border" style="margin:0 2%; padding-bottom:20px;">
                             <label for="exampleFormControlTextarea4">Doctors Diagnosis </label>
                             <textarea class="form-control" name='feedback' id="exampleFormControlTextarea4" rows="3"></textarea>
@@ -196,6 +219,12 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     </div> 
     <?php
   }
+
+?>
+
+<?php
+
+
 
 ?>
   
