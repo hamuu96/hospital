@@ -128,10 +128,14 @@ class create_tables{
             diagnosis varchar(200) not null,
             FOREIGN KEY (user_id) REFERENCES USER (user_id),
             FOREIGN KEY (med_id) REFERENCES MEDICINE (med_id),
+            FOREIGN KEY (med_id2) REFERENCES MEDICINE (med_id),
+            FOREIGN KEY (med_id3) REFERENCES MEDICINE (med_id),
             FOREIGN KEY (did) REFERENCES DOCTORS (did),
             user_id INT(6),
             did INT(6),
-            med_id INT(6)
+            med_id INT(6),
+            med_id2 INT(6),
+            med_id3 INT(6)
            
             )";
         
