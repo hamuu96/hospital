@@ -5,8 +5,6 @@ $try = new conn();
 $connection = $try->connect();
 
 
-$dep = new select($connection);
-$result = $dep->department();
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +55,6 @@ $result = $dep->department();
 			   <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
 			    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 			    <li class="nav-item"><a class="nav-link" href="appointment.php">Appoinment</a></li>
-			   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 			   <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
 			</ul>
 			
@@ -140,11 +137,7 @@ $result = $dep->department();
 					<img src="images/about/two-doc.jpg" alt="" class="img-fluid mt-4">
 				</div>
 			</div>
-			<!-- <div class="col-lg-4 col-sm-6">
-				<div class="about-img mt-4 mt-lg-0">
-					<img src="images/about/img-3.jpg" alt="" class="img-fluid">
-				</div>
-			</div> -->
+		
 			<div style="margin-left: 138px;" class="col-lg-4">
 				<div class="about-content pl-4 mt-4 mt-lg-0">
 					<h2 class="title-color">Personal care <br>& healthy living</h2>
@@ -283,78 +276,7 @@ $result = $dep->department();
 		</div>
 	</div>
 </section>
-<section class="section appoinment">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-6 ">
-				<div class="appoinment-content">
-					<img src="images/about/room.jpg" alt="" class="img-fluid">
-					
-				</div>
-			</div>
-			<div class="col-lg-6 col-md-10 ">
-				<div class="appoinment-wrap mt-5 mt-lg-0">
-					<h2 class="mb-2 title-color">Book appoinment</h2>
-					<p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
-					     <form id="#" class="appoinment-form" method="post" action="#">
-                    <div class="row">
-                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1">
-									<?php while ($row = $result->fetch_assoc()) { ?>
-                                  		<option class="col-lg-2"><?php echo $row["department"] ?></option>
-										 
-									<?php }?>
-                               
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect2">
-                                  <option>Select Doctors</option>
-                                  <option value=""></option>
-								  <option value=""></option>
-								  <option value=""></option>
-								  <option value=""></option>
-                                </select>
-                            </div> -->
-                        </div>
 
-                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <input name="date" id="date" type="text" class="form-control" placeholder="dd/mm/yyyy">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <input name="time" id="time" type="time" class="form-control" placeholder="Time">
-                            </div>
-                        </div>
-                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <input name="name" id="name" type="text" class="form-control" placeholder="Full Name">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <input name="phone" id="phone" type="Number" class="form-control" placeholder="Phone Number">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group-2 mb-4">
-                        <textarea name="message" id="message" class="form-control" rows="6" placeholder="Your Message"></textarea>
-                    </div>
-
-                    <a class="btn btn-main btn-round-full" href="appoinment.html" >Make Appoinment <i class="icofont-simple-right ml-2  "></i></a>
-                </form>
-            </div>
-			</div>
-		</div>
-	</div>
-</section>
 <section class="section testimonial-2 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -419,107 +341,12 @@ $result = $dep->department();
 					<i class="icofont-quote-right"></i>
 				</div>
 
-				<!-- <div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb4.jpg" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Nice Environment!</h4>
-						<span>Partho Sarothi</span>
-						<p class="mt-4">
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div> -->
-
-				<!-- <div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb1.jpg" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Modern Service!</h4>
-						<span>Kolis Mullar</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div> -->
+			
 			</div>
 		</div>
 	</div>
 </section>
-<!-- <section class="section clients">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-7">
-				<div class="section-title text-center">
-					<h2>Partners who support us</h2>
-					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
-				</div>
-			</div>
-		</div>
-	</div> -->
 
-	<!-- <div class="container">
-		<div class="row clients-logo">
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/1.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/2.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/3.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/4.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/5.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/6.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/3.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/4.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/5.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/6.png" alt="" class="img-fluid">
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
 <!-- footer Start -->
 <footer class="footer section gray-bg">
 	<div class="container">

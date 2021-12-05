@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
             $_SESSION['id'] = $userdata[0][0];
             $_SESSION['username'] = substr($userdata[0][1],0,-2).".".substr($userdata[0][2],0,-3).substr($userdata[0][4],-1,2);
             $_SESSION['firstname'] = $userdata[0][1];
-            $_SESSION['lastname'] = $userata[0][1];
+            $_SESSION['lastname'] = $userdata[0][2];
             header('Location:main.php');
         }
 
