@@ -57,34 +57,9 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 </head>
 <body id='top'>
 
-    <header>
-	
-        <nav class="navbar navbar-expand-lg navigation" id="navbar">
-            <div class="container">
-                  <a class="navbar-brand" href="index.html">
-                      <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
-                      <h1>MDX Hospital</h1>
-                  </a>
     
-                  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icofont-navigation-menu"></span>
-              </button>
-          
-              <div class="collapse navbar-collapse" id="navbarmain" >
-                <ul class="navbar-nav ml-auto" >
-                  <li class="nav-item active">
-                    <a class="nav-link" href="admin-panel.php">Home</a>
-                  </li>
-                   
-                    <li class="nav-item"><a class="nav-link" href="">Appoinments</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-        </nav>
-    </header>
 
-    <div class="container" style="margin-top: 100px;">
+    <div class="container" style="margin-top: 200px;">
       <div class="row">
           <div class="col-lg-3 col-md-2"></div>
           <div class="col-lg-6 col-md-8 login-box">
@@ -92,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                   <i class="fa fa-key" aria-hidden="true"></i>
               </div>
               <div class="col-lg-12 login-title">
-                Admini Login 
+                Admin Login 
               </div>
 
               <div class="col-lg-12 login-form">
@@ -112,8 +87,6 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                                   <!-- Error Message -->
                               </div>
 
-                                  <a style="text-align: left; color: white;" href=''>Forgot password?</a><br>
-                                  <a style="text-align: left; color: white;" href=''>If you dont have an account <a href='signup.php'>Sign up</a></a>
                               <div class="col-lg-6 login-btm login-button">
                               <button style="margin-top: 40px;" name='login' type="submit" class="btn btn-outline-primary">LOGIN</button>
                               </div>
