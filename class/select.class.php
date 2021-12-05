@@ -119,7 +119,7 @@ class select{
     }
 
     public function doc_appointment($department){
-        $sql = 'SELECT APPOINTMENT.firstname,APPOINTMENT.lastname,usr_msg,user_id from APPOINTMENT join DOCTORS ON APPOINTMENT.did = DOCTORS.did WHERE DOCTORS.did = ?';
+        $sql = 'SELECT APPOINTMENT.ap_id,APPOINTMENT.firstname,APPOINTMENT.lastname,usr_msg,user_id from APPOINTMENT join DOCTORS ON APPOINTMENT.did = DOCTORS.did WHERE DOCTORS.did = ?';
         $stmi = $this->connection->prepare($sql);
         if ( false===$stmi ) {
            
@@ -159,6 +159,24 @@ class select{
           return $med;
       }
   }
+  public function med_id($med){
+        $sql = 'SELECT * from MEDICINE WHERE med_name = ?';
+        $stm = $this->connection->prepare($sql);
+        if ( false===$stm ) {
+           
+          die('prepare() failed: ' . htmlspecialchars($this->connection->error));
+        }
+        $rc = $stm->bind_param('s',$med);
+        $stm->execute();
+        $result = $stm->get_result();
+        $med = $result->fetch_all();
+
+      
+
+        if (count($med) > 0){
+            return $med;
+        }
+    }
 }
 
 ?>
