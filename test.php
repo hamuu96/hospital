@@ -26,7 +26,7 @@ $insert->initial_insert_doctor();
 $insert->insert_medicine();
 $insert->insert_admin();
 
-header('Location:index.php');
+// header('Location:index.php');
 
 
 ?>

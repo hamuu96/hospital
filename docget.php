@@ -8,9 +8,8 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
-if(!$_SESSION['admin-username']){
-    header('Location:admin.php');
-  }
+$session = new session();
+$session->adm_sess($_SESSION['admin-username']);
 
 $users = new select($connection);
 $email = $_GET['email'];
@@ -76,7 +75,7 @@ $_SESSION['doc-password'] = $d[0][4];
 	
     <nav class="navbar navbar-expand-lg navigation" id="navbar">
         <div class="container">
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="admin-panel.php">
                   <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
                   <h1>MDX Hospital</h1>
               </a>
@@ -91,9 +90,9 @@ $_SESSION['doc-password'] = $d[0][4];
                 <a class="nav-link" href="admin-panel.php">Home</a>
               </li>
                
-                <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
                 <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
                 <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
+                <li class="nav-item"><a class="nav-link" href="doccreate.php">Doctor signup</a></li>
             </ul>
           </div>
         </div>

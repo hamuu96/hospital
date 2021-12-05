@@ -2,7 +2,7 @@
 
 spl_autoload_register('autoload');
 
-
+//gets a file containing a class name
 function autoload($classname){
 
     $extention = '.class.php';

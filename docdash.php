@@ -7,12 +7,16 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
-// echo $_SESSION['did'];
+$session = new session();
+$session->adm_sess($_SESSION['doctors-username']);
+
+//Assign the current timestamp as the user's
+//latest activity
+$_SESSION['last_action'] = time();
 
 $appointment = new select($connection);
 $result = $appointment->doc_appointment($_SESSION['did']);
-// echo $_SESSION['did'];
-// var_dump($result);
+
 
 
 
@@ -58,13 +62,22 @@ $result = $appointment->doc_appointment($_SESSION['did']);
           
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                  </li>
-                    <li class="nav-item"><a class="nav-link" href="dappointment.php">Appoinment</a></li>
-                   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                  <!-- <li class="nav-item active">
+                    <a class="nav-link" href="doc.html">Home</a>
+                  </li> -->
+                    <li class="nav-item"><a class="nav-link" href="dappointment.php">Appoinments</a></li>
+
                 </ul>
               </div>
+              <div class="dropdown" style="padding-left:100px;">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $_SESSION['doctors-username']; ?>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a style="text-align: center;" class="dropdown-item" href="#">update profile</a>
+                <button style="width: 100%; border:none; background:none;"><a class="dropdown-item" href="#">log out</a></button>
+              </div>
+            </div>
             </div>
         </nav>
     </header>
