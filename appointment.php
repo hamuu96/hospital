@@ -17,9 +17,9 @@ include 'includes/autoloader.ini.php';
 $try = new conn();
 $connection = $try->connect();
 
-if(!$_SESSION['username']){
-  header('Location:login.php');
-}
+$session = new session();
+$session->user_sess($_SESSION['username']);
+
 
 $dep = new select($connection);
 $result = $dep->department();
@@ -30,10 +30,11 @@ $insert = new insert_data($connection);
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
   if(isset($_POST['appointment'])){
 
-    $firstname = $insert->escape_user_input($_POST['firstname']);
-    $lastname = $insert->escape_user_input($_POST['lastname']);
+   
+
+    $firstname = $insert->escape_user_input($_SESSION['firstname']);
+    $lastname = $insert->escape_user_input($_SESSION['lastname']);
     $date = $insert->escape_user_input($_POST['date']);
-    $time =  $insert->escape_user_input($_POST['time']);
     $msg = $insert->escape_user_input($_POST['message']);
     $department = $insert->escape_user_input($_POST['department']);
     $contact = $insert->escape_user_input($_POST['phone']);
@@ -112,7 +113,6 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 				   <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
 					<li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 					<li class="nav-item"><a class="nav-link" href="appoinment.php">Appoinment</a></li>
-				   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 				</ul>
 			  </div>
             <div class="dropdown" style="padding-left:100px;">
@@ -141,11 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
           <span class="text-white">Book your Seat</span>
           <h1 class="text-capitalize mb-5 text-lg">Appoinment</h1>
 
-          <!-- <ul class="list-inline breadcumb-nav">
-            <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
-            <li class="list-inline-item"><span class="text-white">/</span></li>
-            <li class="list-inline-item"><a href="#" class="text-white-50">Book your Seat</a></li>
-          </ul> -->
+          
         </div>
       </div>
     </div>
@@ -196,7 +192,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input id="time" type="time" name='time' class="form-control" placeholder="Time">
+                                <input id="time" type="time" name='time' class="form-control" placeholder="Time" disabled>
                             </div>
                         </div>
 
@@ -208,12 +204,12 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input  id="name" type="text" name='firstname' placeholder='firstname' class="form-control" >
+                                <input  id="name" type="text" name='firstname' placeholder='firstname' class="form-control"  value="<?php echo $_SESSION['firstname'];?>" disabled>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                            <input id="date" name='lastname' type="text" class="form-control" placeholder="lastname">
+                            <input id="date" name='lastname' type="text" class="form-control" placeholder="lastname" value="<?php echo $_SESSION['lastname'];?>" disabled>
                             </div>
                         </div>
                     </div>
