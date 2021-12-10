@@ -3,7 +3,10 @@
 class security{
 
     public function hash($data){
-        $data = password_hash($data, PASSWORD_DEFAULT);
+        $options = [
+            'cost' => 14,
+        ];
+        $data = password_hash($data, PASSWORD_DEFAULT, $options);
         return $data;
     }
 
@@ -13,7 +16,7 @@ class security{
     }
     public function html_strip($data){
         $data = htmlspecialchars($data,ENT_QUOTES);
-        return $data;
+        return trim($data);
     }
 }
 

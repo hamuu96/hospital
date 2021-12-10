@@ -32,7 +32,7 @@ class insert_data{
         $username = 'administrator';
         $firstname = 'james';
         $lastname = 'Doe';
-        $admin_pass = '802700';
+        $admin_pass = '$2y$14$f5qwwX2mWHopBeA6F3m1t.IvfXyLhoYzifE58p49iVFOMHvNAaiEm';
         $rc = $smti->execute(); 
         if ( false===$rc ) {
             die('execute() failed: ' . htmlspecialchars($smti->error));
@@ -66,13 +66,7 @@ class insert_data{
             header('Location:login.php'); 
           }
           
-        // if($smti->execute()){
-        //     header('Location:login.php');
-        //     // $this->connection->close();
-        // }
-        // else{
-        //     echo 'not work';
-        // }
+     
 
 
     }
@@ -241,7 +235,7 @@ class insert_data{
         $firstname = 'james';
         $lastname = 'Doe';
         $contact = '+4471119191';
-        $doc_pass = '1234';
+        $doc_pass = '$2y$14$xYYtenCrd2SPMb1Q4S7UteA9kK7FGjqRuD7YF/zCJN6skDveqbYKa';
         $age = 44;
         $email = 'james@gmail.com';
         $gender = 'Male';
@@ -269,6 +263,13 @@ class insert_data{
         $rc = $smti->execute();
         if ( false===$rc ) {
             die('execute() failed: ' . htmlspecialchars($smti->error));
+          }
+          else{
+            ?>
+            <div class="alert alert-success" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+             Doctor created 
+             </div>
+        <?php
           }
 
 
@@ -298,7 +299,7 @@ class insert_data{
             die('execute() failed: ' . htmlspecialchars($smti->error));
           }
         else{
-            header('Location:confirmation.html');
+            header('Location:confirmation.php');
         }
         
 

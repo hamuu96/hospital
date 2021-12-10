@@ -86,7 +86,16 @@ class session{
       $_SESSION['counter'] = time();
       
       }
-}
+    }
+    public function logout($session, $location){
+      
+      if(isset($session)){
+        session_unset();
+        session_destroy();
+        header("Location:{$location}");
+        exit;
+      }
+    }
 }
 
 

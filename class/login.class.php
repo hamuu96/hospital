@@ -110,13 +110,13 @@
             }
 
         } 
-         public function admin($email, $password){
+         public function admin_login_verify($username){
 
-            $sql = "SELECT * from ADMINISTRATOR WHERE username = ? and admin_pass = ?";
+            $sql = "SELECT * from ADMINISTRATOR WHERE username = ? ";
 
             $smt= $this->connection->prepare($sql);
 
-            $smt->bind_param("ss",$email, $password);
+            $smt->bind_param("s",$username);
             $smt->execute();
             $result = $smt->get_result();
             $doc = $result->fetch_all();
@@ -133,7 +133,8 @@
             <?php
             }
 
-        } public function escape_user_input($input){
+        }
+        public function escape_user_input($input){
             return $this->connection->real_escape_string($input);
         }
     }

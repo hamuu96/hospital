@@ -177,6 +177,25 @@ class select{
             return $med;
         }
     }
+
+    public function user_records($userid){
+      $sql = 'SELECT DOCTORS.firstname,DOCTORS.lastname,diagnosis,med_id from RECORDS join DOCTORS ON RECORDS.did = DOCTORS.did WHERE user_id = ?';
+      $stm = $this->connection->prepare($sql);
+      if ( false===$stm ) {
+         
+        die('prepare() failed: ' . htmlspecialchars($this->connection->error));
+      }
+      $rc = $stm->bind_param('i',$userid);
+      $stm->execute();
+      $result = $stm->get_result();
+      $med = $result->fetch_all();
+
+    
+
+      if (count($med) > 0){
+          return $med;
+      }
+  }
 }
 
 ?>

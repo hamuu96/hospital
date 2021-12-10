@@ -12,9 +12,9 @@ class create_tables{
     private function admin_table($connection){
         $sql = "CREATE TABLE IF NOT EXISTS ADMINISTRATOR (
             admin_id INT(6) auto_increment primary key,
-            username varchar(20) not null,
-            firstname varchar(10) not null,
-            lastname varchar(20) not null,
+            username varchar(50) not null,
+            firstname varchar(30) not null,
+            lastname varchar(30) not null,
             admin_pass varchar(200) not null 
            
             )";
@@ -32,14 +32,14 @@ class create_tables{
     private function user_table($connection){
         $sql = "CREATE TABLE IF NOT EXISTS USER (
             user_id INT(6) auto_increment primary key,
-            firstname varchar(30) not null,
-            lastname varchar(30) not null,
-            contact varchar(30) not null, 
+            firstname varchar(50) not null,
+            lastname varchar(50) not null,
+            contact varchar(50) not null, 
             user_pass varchar(200) not null, 
             age INT(3) not null,
             email varchar(50) not null,
             gender char(8) not null,
-            address varchar(30) not null
+            address varchar(50) not null
             )";
         
         if($connection->query($sql) == TRUE){
@@ -56,13 +56,13 @@ class create_tables{
         $sql = "CREATE TABLE IF NOT EXISTS DOCTORS (
             did INT(6) auto_increment primary key,
             firstname varchar(10) not null,
-            lastname varchar(20) not null,
-            contact varchar(30) not null, 
+            lastname varchar(50) not null,
+            contact varchar(50) not null, 
             doc_pass varchar(200) not null,
             age INT(3) not null,
             email varchar(50) not null,
             gender char(8) not null,
-            address varchar(30) not null,
+            address varchar(50) not null,
             FOREIGN KEY (dep_id) REFERENCES DEPARTMENT (dep_id),
             dep_id INT(6)
             
@@ -104,8 +104,8 @@ class create_tables{
             usr_msg varchar(300) not null,
             -- ap_time time not null,
             contact varchar(30) not null,
-            firstname varchar(10) not null,
-            lastname varchar(20) not null,
+            firstname varchar(50) not null,
+            lastname varchar(50) not null,
             FOREIGN KEY (user_id) REFERENCES USER (user_id),
             FOREIGN KEY (did) REFERENCES DOCTORS (did),
             user_id INT(6),
@@ -164,12 +164,29 @@ class create_tables{
         }
  
     }
+    private function contact($connection){
+        $sql = "CREATE TABLE IF NOT EXISTS CONTACT (
+            cont_id INT(6) auto_increment primary key,
+            message varchar(150) not null,
+            email varchar(150) not null,
+            topic varchar(100) not null,
+            )";
+        
+        if($connection->query($sql) == TRUE){
+            echo 'medicine table created';
+        }
+        else{
+            echo 'Error creating user: '. $connection->error;
+        }
+ 
+    }
     
   
 
     public function main($connection){
         $run = new create_tables($connection);
         $run->admin_table($connection);
+        $run->contact($connection);
         $run->user_table($connection);
         $run->department_table($connection);
         $run->doctor_table($connection);
