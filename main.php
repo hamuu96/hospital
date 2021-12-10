@@ -15,6 +15,11 @@ $session->user_sess($_SESSION['username']);
 $dep = new select($connection);
 $result = $dep->department();
 
+if(isset($_POST['logout'])){
+	
+	$session->logout($_SESSION['username'],'login.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -64,19 +69,22 @@ $result = $dep->department();
 			   <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
 			    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 			    <li class="nav-item"><a class="nav-link" href="appointment.php">Appoinment</a></li>
-			   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+			   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 			</ul>
         
 			</div>
+			<form action="main.php" method="POST">
             <div class="dropdown" style="padding-left:100px;">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?php echo $_SESSION['username']; ?>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">View records</a>
-					<a class="dropdown-item" href="#">log out</a>
+						<a style="text-align: center;" class="dropdown-item" href="update.php">Update profile</a>
+						<a style="text-align: center;" class="dropdown-item" href="records.php">view records</a>
+					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
 				</div>
 		  </div>
+		  </form>
 		</div>
 	</nav>
 </header>
@@ -92,9 +100,9 @@ $result = $dep->department();
 				<div class="block">
 					<div class="divider mb-3"></div>
 					<span class="text-uppercase text-sm letter-spacing ">Total Health care solution</span>
-					<h1 class="mb-3 mt-3">Your most trusted health partner</h1>
+					<h1 class="mb-3 mt-3">Your most trusted health partner for decades</h1>
 					
-					<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+					<p class="mb-4 pr-5">We are know to have provided quality services to our customer for decades in all areas, we take healthcare seriously at MDX hospital</p>
 					<div class="btn-container ">
 						<button style="border: none;"><a href="appointment.php" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment <i class="icofont-simple-right ml-2  "></i></a></button>
 					</div>
@@ -155,11 +163,7 @@ $result = $dep->department();
 					<img src="images/about/two-doc.jpg" alt="" class="img-fluid mt-4">
 				</div>
 			</div>
-			<!-- <div class="col-lg-4 col-sm-6">
-				<div class="about-img mt-4 mt-lg-0">
-					<img src="images/about/img-3.jpg" alt="" class="img-fluid">
-				</div>
-			</div> -->
+			
 			<div style="margin-left: 138px;" class="col-lg-4">
 				<div class="about-content pl-4 mt-4 mt-lg-0">
 					<h2 class="title-color">Personal care <br>& healthy living</h2>
@@ -215,7 +219,7 @@ $result = $dep->department();
 				<div class="section-title">
 					<h2>Award winning patient care</h2>
 					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+					<p>we were crowned the most prestige hospital in the medical industry due to our dedication towards our customers and the attention we provide to them.</p>
 				</div>
 			</div>
 		</div>
@@ -229,7 +233,7 @@ $result = $dep->department();
 					</div>
 
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">We have the most high end laborotory services, </p>
 					</div>
 				</div>
 			</div>
@@ -241,7 +245,7 @@ $result = $dep->department();
 						<h4 class="mt-3 mb-3">Heart Disease</h4>
 					</div>
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">At MDX hospital we have the most prestigous Cardiologists.</p>
 					</div>
 				</div>
 			</div>
@@ -253,7 +257,7 @@ $result = $dep->department();
 						<h4 class="mt-3 mb-3">Dental Care</h4>
 					</div>
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">We provide dental care 24/7 all through the week .</p>
 					</div>
 				</div>
 			</div>
@@ -267,7 +271,7 @@ $result = $dep->department();
 					</div>
 
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">Surgery in our hospital can take less than 12 hours .</p>
 					</div>
 				</div>
 			</div>
@@ -279,7 +283,7 @@ $result = $dep->department();
 						<h4 class="mt-3 mb-3">Neurology Sargery</h4>
 					</div>
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">We have neurosurgons from all over the cournty consulting for us</p>
 					</div>
 				</div>
 			</div>
@@ -288,10 +292,10 @@ $result = $dep->department();
 				<div class="service-item mb-4">
 					<div class="icon d-flex align-items-center">
 						<i class="icofont-dna-alt-1 text-lg"></i>
-						<h4 class="mt-3 mb-3">Gynecology</h4>
+						<h4 class="mt-3 mb-3">ENT</h4>
 					</div>
 					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+						<p class="mb-4">We have an ENT department that are highly trained and ready to help</p>
 					</div>
 				</div>
 			</div>
@@ -363,107 +367,11 @@ $result = $dep->department();
 					<i class="icofont-quote-right"></i>
 				</div>
 
-				<!-- <div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb4.jpg" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Nice Environment!</h4>
-						<span>Partho Sarothi</span>
-						<p class="mt-4">
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div> -->
-
-				<!-- <div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb1.jpg" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Modern Service!</h4>
-						<span>Kolis Mullar</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div> -->
 			</div>
 		</div>
 	</div>
 </section>
-<!-- <section class="section clients">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-7">
-				<div class="section-title text-center">
-					<h2>Partners who support us</h2>
-					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
-				</div>
-			</div>
-		</div>
-	</div> -->
 
-	<!-- <div class="container">
-		<div class="row clients-logo">
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/1.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/2.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/3.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/4.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/5.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/6.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/3.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/4.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/5.png" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="images/about/6.png" alt="" class="img-fluid">
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
 <!-- footer Start -->
 <footer class="footer section gray-bg">
 	<div class="container">
@@ -473,7 +381,7 @@ $result = $dep->department();
 					<div class="logo mb-4">
 						<H1>MDX Hospital</H1>
 					</div>
-					<p>Tempora dolorem voluptatum nam vero assumenda voluptate, facilis ad eos obcaecati tenetur veritatis eveniet distinctio possimus.</p>
+					<p>We are know to have provided quality services to our customer for decades in all areas, we take healthcare seriously at MDX hospital</p>
 
 					<ul class="list-inline footer-socials mt-4">
 						<li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="icofont-facebook"></i></a></li>
@@ -494,7 +402,7 @@ $result = $dep->department();
 						<li><a href="#">About</a></li>
 						<li><a href="#">Services</a></li>
 						<li><a href="appointment.php">Appointment</a></li>
-						<li><a href="#">Contact</a></li>
+						<li><a href="contact.php">Contact</a></li>
 					</ul>
 				</div>
 			</div>

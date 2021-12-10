@@ -978,6 +978,7 @@ a:focus {
   box-shadow: none;
   width: 100%;
   background: #f4f9fc;
+   color: black;
 }
 
 .contact-form-wrap .form-group-2 {
