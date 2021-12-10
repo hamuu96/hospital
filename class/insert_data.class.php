@@ -98,7 +98,7 @@ class insert_data{
     //input validation function for signup form 
     public function validation($firstname,$lastname,$contact,$user_pass,$age,$email, $gender,$address){
         if($firstname != '' and $lastname != '' and $user_pass != '' and $contact != '' and $email != '' and $gender != '' and $address != ''){
-            if (strlen($user_pass) >= 3){ //change password length
+            if (strlen($user_pass) >= 7){ //change password length
                 $return = $this->check($email);
                 return $return;
                 // return True;
@@ -147,7 +147,7 @@ class insert_data{
       }
       public function validate_doc($firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address){
         if($firstname != '' and $lastname != '' and $doc_pass != '' and $contact != '' and $email != '' and $gender != '' and $address != ''){
-            if (strlen($doc_pass) >= 3){ //change password length
+            if (strlen($doc_pass) >= 7){ //change password length
                 $return = $this->check_doc($email);
                 return $return;
                 // return True;
