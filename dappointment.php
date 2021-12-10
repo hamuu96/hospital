@@ -7,8 +7,9 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
+//manage sessions 
 $session = new session();
-$session->adm_sess($_SESSION['doctors-username']);
+$session->doc_sess($_SESSION['doctors-username']);
 
 
 
@@ -33,22 +34,25 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     // var_dump($userid);
 
     //convert to integer 
-    $ap_id = (int) $_POST['apid']; // return string
-   
-    
+    $ap_id = (int) $_POST['apid']; // -> return string
     
     //insert data into records table
     $insert = new insert_data($connection);
     $suc_record = $insert->insert_record($msg,$userid,$_SESSION['did'],$med1[0][0],$med2[0][0],$med3[0][0]);
 
+
     if($suc_record == True){
       $del = new delete($connection);
       $del->del_appointment($ap_id);
+      header("Refresh:0");  //refresh page 
     }
 
   }
 }
 
+if(isset($_POST['logout'])){
+	$session->logout($_SESSION['doctors-username'],'dlogin.php');
+}
 
 ?>
 <!DOCTYPE html>
@@ -98,15 +102,17 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                     <li class="nav-item"><a class="nav-link" href="docdash.php">Dashboard</a></li>
                 </ul>
               </div>
-              <div class="dropdown" style="padding-left:100px;">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo $_SESSION['doctors-username']; ?>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a style="text-align: center;" class="dropdown-item" href="#">update profile</a>
-                <button style="width: 100%; border:none; background:none;"><a class="dropdown-item" href="#">log out</a></button>
-              </div>
-            </div>
+              <form action="docdash.php" method="POST">
+            <div class="dropdown" style="padding-left:100px;">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo $_SESSION['doctors-username']; ?>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a style="text-align: center;" class="dropdown-item" href="records.php">Update profile</a>
+					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
+				</div>
+		  </div>
+		  </form>
             </div>
         </nav>
     </header>

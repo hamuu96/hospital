@@ -29,6 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
             $_SESSION['lastname'] = $docdata[0][1];
             $_SESSION['did'] = $docdata[0][0];
             $_SESSION['department'] = $docdata[0][9];
+            $_SESSION['doc-email'] = $email;
             header('Location:docdash.php');
             
         }
@@ -93,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                               </div>
 
                                   <!-- <a style="text-align: left; color: white;" href=''>Forgot password?</a><br> -->
-                                  <a style="text-align: left; color: white;" href=''>If you dont have an account <a style="color:red" href='signup.php'>Sign up</a></a>
+                                  <!-- <a style="text-align: left; color: white;" href=''>If you dont have an account <a style="color:red" href='signup.php'>Sign up</a></a> -->
                               <div class="col-lg-6 login-btm login-button">
                               <button style="margin-top: 40px;" name='login' type="submit" class="btn btn-outline-primary">LOGIN</button>
                               </div>

@@ -117,6 +117,16 @@ $_SESSION['doc-password'] = $d[0][4];
         </div>
     </form>
     <?php
+    if(isset($_SESSION['suc-docupdate'])){
+        ?>
+        <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+        <?php echo $_SESSION['suc-docupdate']; 
+        $_SESSION['suc-docupdate'] = '';
+        ?>
+        </div>
+        <?php
+    }
+       
 
 if(gettype($doc) == 'array'){
     ?>

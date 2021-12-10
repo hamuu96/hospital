@@ -8,6 +8,8 @@ include 'includes/autoloader.ini.php';
 $conn = new conn;
 $connection = $conn->connect();
 
+$sec = new security($connection);
+
 // $users = new select($connection);
 
 // echo $user;
@@ -23,29 +25,33 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $address = $_POST['address'];
-        $password = $_SESSION['password'];
+        $password =  $sec->hash($_SESSION['password']);
         $userid = $_SESSION['userid'];
 
 
-        if(!empty($firstname and $lastname and $contact and $age and $email and $gender and $address) ){
+        if(!empty($firstname and $lastname and $contact and $age and $email and $gender and $address and $password) ){
         $update = new update($connection);
         $success = $update->updateuser($firstname,$lastname,$contact,$password,$age,$email, $gender,$address,$userid);
+        // header('Location:userget.php');
+
+        if($success == True){
+            $_SESSION['suc-userupdate'] = 'Users record updated successfully';
+
+        }
+        header("Refresh:0");  //refresh page 
         header('Location:userget.php');
+
 
     }
     else{
-
-        ?>
-        <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
-           Please fill user data before updating
-        </div>
-    <?php
+        $_SESSION['suc-userupdate'] = ' Please fill user data before updating';
+    }
 
 
 header('Location:userget.php');
     }
 }
-}
+
 
 ?>
 

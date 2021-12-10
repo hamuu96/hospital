@@ -23,6 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == 'GET'){
     }
 }
 
+if(isset($_POST['logout'])){
+	$session->logout($_SESSION['admin-username'],'admin.php');
+}
+
+
 
 global $d;
 $d = $user;
@@ -52,9 +57,9 @@ $_SESSION['password'] = $d[0][4];
   
     <title>MDX Hospital</title>
     <!-- bootstrap  -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <!-- Favicon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-  
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
     <!-- Icon Font Css -->
@@ -92,15 +97,17 @@ $_SESSION['password'] = $d[0][4];
                 
             </ul>
           </div>
-          <div class="dropdown" style="padding-left:100px;">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo $_SESSION['admin-username']; ?>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a style="text-align: center;" class="dropdown-item" href="#">update profile</a>
-                <button style="width: 100%; border:none; background:none;"><a class="dropdown-item" href="#">log out</a></button>
-              </div>
-            </div>
+          <form action="userget.php" method="POST">
+            <div class="dropdown" style="margin-right:-199px; margin-left:14px;">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo $_SESSION['admin-username']; ?>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a style="text-align: center;" class="dropdown-item" href="records.php">Update profile</a>
+					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
+				</div>
+		  </div>
+		  </form>
      
         </div>
         
@@ -124,6 +131,14 @@ $_SESSION['password'] = $d[0][4];
         </div>
         </div>
     </form>
+
+    
+    <div class="alert alert-success" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
+        <?php echo $_SESSION['suc-userupdate']; 
+        $_SESSION['suc-userupdate'] = '';
+        ?>
+        </div>
+  
     <?php
 
         if(gettype($user) == 'array'){
@@ -138,7 +153,10 @@ $_SESSION['password'] = $d[0][4];
                     <label for="inputPassword4" class="form-label">Lastname</label>
                     <input type="text" class="form-control" id="inputAddress" name='lastname' placeholder="<?php echo $user[0][2] ?>">
                 </div>
-               
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputEmail4" name='password' placeholder="password">
+                </div> 
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail4" name='email' placeholder="<?php echo $user[0][6] ?>">
@@ -173,19 +191,19 @@ $_SESSION['password'] = $d[0][4];
             <?php
     }
     else{
-        ?>
-      <div class="alert alert-primary" role="alert" style="text-align: center; margin-top:20px;">
-        <?php echo $user;?>
-      </div>
-    <?php
+      
     }
 
 
     ?>
-</body>
+
 
   
-
+<!-- bootstrap js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
 
 </body>
 </html>

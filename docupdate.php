@@ -35,17 +35,14 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
         if(!empty($firstname and $lastname and $contact and $age and $email and $gender and $address) ){
         $update = new update($connection);
         $success = $update->updatedoc($firstname,$lastname,$contact,$doc_pass,$age,$email, $gender,$address,$docid);
+       
         
         if($success == True){
-            $success['suc-docupdate'] = 'Doctors record updated successfully';
+            $_SESSION['suc-docupdate'] = 'Doctors record updated successfully';
 
-        ?>
-        <div class="alert alert-danger" role="alert" style='margin-top:20px; text-align:center; text-transform:uppercase;'>
-        user update successful
-        </div>
-    <?php
         }
-        // header('Location:docget.php');
+        header("Refresh:0");  //refresh page 
+        header('Location:docget.php');
 
     }
     else{
