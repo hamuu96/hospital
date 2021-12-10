@@ -7,21 +7,24 @@ $conn = new conn;
 $connection = $conn->connect();
 
 
-$user = new login($connection);
+$admin = new login($connection);
+$sec = new security();
 
 
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
     if(isset($_POST['login'])){
-        $username = $user->escape_user_input($_POST['username']);
-        $password = $user->escape_user_input($_POST['password']);
+        $username = $admin->escape_user_input($_POST['username']);
+        $password = $admin->escape_user_input($_POST['password']);
 
-        $docdata = $user->admin($username,$password);
 
-        if ($docdata != null){
-            $_SESSION['admin-username'] = $docdata[0][1];
-            $_SESSION['firstname'] = $docdata[0][2];
-            $_SESSION['lastname'] = $docdata[0][3];
-            $_SESSION['did'] = $docdata[0][0];
+        $admindata = $admin->admin_login_verify($username);
+        $adminpass = $admindata[0][4];
+        
+        if ($sec->verify($password,$adminpass) == true){
+            $_SESSION['admin-username'] = $admindata[0][1];
+            $_SESSION['firstname'] = $admindata[0][2];
+            $_SESSION['lastname'] = $admindata[0][3];
+            $_SESSION['did'] = $admindata[0][0];
             header('Location:admin-panel.php');
         }
 

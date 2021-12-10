@@ -17,6 +17,10 @@ $no_users = count($no_users);
 $doctors = $users->doctors();
 $doctors = count($doctors);
 
+if(isset($_POST['logout'])){
+	$session->logout($_SESSION['admin-username'],'admin.php');
+}
+
 ?>
 
 
@@ -75,6 +79,17 @@ $doctors = count($doctors);
                     <li class="nav-item"><a class="nav-link" href="doccreate.php">Doctor signup</a></li>
                 </ul>
               </div>
+              <form action="admin-panel.php" method="POST">
+            <div class="dropdown" style="margin-right:-199px; margin-left:14px;">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo $_SESSION['admin-username']; ?>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a style="text-align: center;" class="dropdown-item" href="records.php">Update profile</a>
+					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
+				</div>
+		  </div>
+		  </form>
             </div>
         </nav>
     </header>
@@ -132,5 +147,13 @@ $doctors = count($doctors);
   </div>
     </div>
 
+
+
+
+   
+<!-- bootstrap js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

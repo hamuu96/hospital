@@ -8,15 +8,17 @@ $conn = new conn;
 $connection = $conn->connect();
 
 $session = new session();
-$session->adm_sess($_SESSION['doctors-username']);
+$session->doc_sess($_SESSION['doctors-username']);
 
-//Assign the current timestamp as the user's
-//latest activity
-$_SESSION['last_action'] = time();
+
 
 $appointment = new select($connection);
 $result = $appointment->doc_appointment($_SESSION['did']);
 
+
+if(isset($_POST['logout'])){
+	$session->logout($_SESSION['doctors-username'],'dlogin.php');
+}
 
 
 
@@ -69,15 +71,17 @@ $result = $appointment->doc_appointment($_SESSION['did']);
 
                 </ul>
               </div>
-              <div class="dropdown" style="padding-left:100px;">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo $_SESSION['doctors-username']; ?>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a style="text-align: center;" class="dropdown-item" href="#">update profile</a>
-                <button style="width: 100%; border:none; background:none;"><a class="dropdown-item" href="#">log out</a></button>
-              </div>
-            </div>
+              <form action="docdash.php" method="POST">
+            <div class="dropdown" style="padding-left:100px;">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo $_SESSION['doctors-username']; ?>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<!-- <a style="text-align: center;" class="dropdown-item" href="php">Update profile</a> -->
+					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
+				</div>
+		  </div>
+		  </form>
             </div>
         </nav>
     </header>
