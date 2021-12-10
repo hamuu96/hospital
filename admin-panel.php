@@ -12,10 +12,11 @@ $session->adm_sess($_SESSION['admin-username']);
 
 $users = new select($connection);
 $no_users = $users->user();
-$no_users = count($no_users);
+
+
+
 
 $doctors = $users->doctors();
-$doctors = count($doctors);
 
 if(isset($_POST['logout'])){
 	$session->logout($_SESSION['admin-username'],'admin.php');
@@ -58,7 +59,7 @@ if(isset($_POST['logout'])){
 	
         <nav class="navbar navbar-expand-lg navigation" id="navbar">
             <div class="container">
-                  <a class="navbar-brand" href="index.html">
+                  <a class="navbar-brand" href="landing.php">
                       <!-- <img src="images/logo.png" alt="" class="img-fluid"> -->
                       <h1>MDX Hospital</h1>
                   </a>
@@ -73,7 +74,7 @@ if(isset($_POST['logout'])){
                     <a class="nav-link" href="admin-panel.php">Home</a>
                   </li>
                    
-                    <li class="nav-item"><a class="nav-link" href="">user profiles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="userget.php">user profiles</a></li>
                     <li class="nav-item"><a class="nav-link" href="docget.php">Doctors profiles</a></li>
                     <li class="nav-item"><a class="nav-link" href="docdelete.php">Doctor Delete</a></li>
                     <li class="nav-item"><a class="nav-link" href="doccreate.php">Doctor signup</a></li>
@@ -85,7 +86,6 @@ if(isset($_POST['logout'])){
 					<?php echo $_SESSION['admin-username']; ?>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a style="text-align: center;" class="dropdown-item" href="records.php">Update profile</a>
 					<button style="width: 100%; background:none; border:none;" type="submit" name="logout"><a class="dropdown-item" >log out</a></button>
 				</div>
 		  </div>
@@ -124,11 +124,22 @@ if(isset($_POST['logout'])){
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">Number of users in the sytem</h5>
         <p class="card-text" style="padding-top: 5px;">With supporting text below as a natural lead-in to additional content.</p><br>
        <?php
+      //  var_dump($no_users);
+      //  echo gettype($no_users);
+      //  echo $no_users;
+
+       if(gettype($no_users) != 'string'){
+         
+        echo "No of users: ".count($no_users); 
+       }
+       else{
+         echo $no_users;
+       }
        
-        echo "No of users: {$no_users}";
+       
        ?>
       </div>
     </div>
@@ -139,7 +150,14 @@ if(isset($_POST['logout'])){
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text" style="padding-top: 5px;">With supporting text below as a natural lead-in to additional content.</p><br>
         <?php
-            echo "No of doctors: {$doctors}";
+              if(gettype($doctors) != 'string'){
+         
+                echo "No of users: ".count($doctors); 
+               }
+               else{
+                 echo $doctors;
+               }
+               
 
         ?>
       </div>

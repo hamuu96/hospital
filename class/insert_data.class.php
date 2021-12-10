@@ -335,9 +335,7 @@ class insert_data{
         $sql = "INSERT INTO RECORDS (diagnosis,user_id,did,med_id,med_id2,med_id3) 
         VALUE(?,?,?,?,?,?)";
 
-        echo $medid[0][0];
-        echo $medid1[0][0];
-        echo $medid2[0][0];
+       
 
         
         $smti= $this->connection->prepare($sql);

@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
               <div class="collapse navbar-collapse" id="navbarmain" >
                 <ul class="navbar-nav ml-auto" >
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link" href="landing.php">Home</a>
                   </li>
                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>

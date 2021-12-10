@@ -21,19 +21,15 @@ $table_creation = new create_tables($database_select);
 $table_creation->main($database_select);
 
 $insert = new insert_data($database_select);
-$run = True;
-if ($run == True){
+
 
 $insert->insert_dep();
-$insert->initial_insert_doctor();
+// $insert->initial_insert_doctor();
 $insert->insert_medicine();
 $insert->insert_admin();
+$connection->close();
 header('Location:landing.php');
-$run = False;
-}
-else{
-    header('Location:landing.php');
-}
+
 
 
 

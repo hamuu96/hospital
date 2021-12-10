@@ -88,7 +88,7 @@ if(isset($_POST['logout'])){
 	
         <nav class="navbar navbar-expand-lg navigation" id="navbar">
             <div class="container">
-                  <a class="navbar-brand" href="index.html">
+                  <a class="navbar-brand" href="docdash.php">
                       <h1>MDX Hospital</h1>
                   </a>
     
